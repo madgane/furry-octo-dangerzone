@@ -1,0 +1,31 @@
+
+This section addresses the question of how the performance can be improved by knowing the channel inner product. The inner product matrix is already discussed in the optimization objective in (\ref{opt_eqn}). Matrix $\mathbf{U}^H \mathbf{U}$ provides the inner product between all the channel vectors in $\mathcal{K}$. The objective as posed is to maximize the volume of the parallelopipe by selecting the binary matrix $\mathbf{X}$  with ones at the desired users. The metric used to determine the degenerate subspace is given by
+\begin{ceq}
+\mathbf{C}_{i,j} = \det{\left ( \left [\mathbf{h}^T_i \ \mathbf{h}^T_j]^H [\mathbf{h}^T_i \ \mathbf{h}^T_j \right ] \right )}
+\label{mca_1:1}
+\end{ceq}
+where $i,j$ correspond to the user indices. The entry $\mathbf{C}_{i,j}$ provides a measure of the volume enclosed by the vectors $\mathbf{h}_i$ and $\mathbf{h}_j$. The matrix $\mathbf{C}$ which is symmetric, can be decomposed into a diagonal form by unitary matrix $\mathbf{E}$ which is then represented by $\mathbf{E} \mathbf{\Lambda} \mathbf{E}^H$. Matrix $\mathbf{E}$ is represented as the matrix of $\mathbf{e}$ vectors and the diagonal matrix $\mathbf{\Lambda}$ contains the corresponding eigen-values in the diagonal.
+
+The selection is carried out by selecting the user whose channel vector forms the maximum volume with all other users in the system and the existing users in $\mathcal{S}$. This is achieved by selecting the maximum index of the maximum eigen vector of the matrix $\mathbf{C}$ as discussed in \cite{saaty2008decision}. The index of the maximum element in $\mathbf{e}_{\lambda_{max}}$ corresponds to the user index to be selected for $\mathcal{S}$ where $\lambda_{max}$ is the index corresponding to the maximum eigen-value in the diagonal elements of $\mathbf{\Lambda}$.
+
+Once the set $\mathcal{S} \neq \{ \emptyset \}$, (\ref{mca_1:1}) is modified to include the channel vectors $\mathbf{h}_k$ of users in the set $\forall \ k \in \mathcal{S}$ as
+\begin{eqnarray}
+\mathbf{S} &=& [\mathbf{h}^T_a \ \mathbf{h}^T_b \ ... \ \mathbf{h}^T_f] \ \forall \ a,b,...,f \in \mathcal{S} \\
+\mathbf{C}_{i,j} &=& \det{\left ( \left [ \mathbf{S} \ \mathbf{h}^T_i \ \mathbf{h}^T_j]^H [\mathbf{S} \ \mathbf{h}^T_i \ \mathbf{h}^T_j \right ] \right ) }
+\label{mca_1:2}
+\end{eqnarray}
+with the updated matrix $\mathbf{C}$, the same procedure is carried out as earlier to arrive at the next user. This process is then repeated by updating (\ref{mca_1:2}) to find the remaining users which is explained briefly in Algorithm \ref{algorithm_3}, where $e^l_{\lambda_{max}}$ is the $l^{\mathrm{th}}$ entry in the vector $\mathbf{e}_{\lambda_{max}}$. Since initial selection is based on the pairwise determinant metric, users are selected based on maximizing the area over the remaining set of users in $\{ \mathcal{K} \backslash \mathcal{S} \}$ at each iteration of user search.
+
+%\begin{algorithm}[H]
+%\STATE{\textbf{Initialize:} $\mathcal{S} = \{\emptyset\}$}
+%\STATE{\textbf{Formulate:} $\mathbf{C}$ based on (\ref{mca_1:1})}
+%\STATE{\textbf{Search:} $\displaystyle i = \arg \max_l | e^l_{\lambda_{max}} | \ \forall \ e^l_{\lambda_{max}} \in \mathbf{e}_{\lambda_{max}}$}
+%\STATE{\textbf{Update:} $\mathcal{S} = \mathcal{S} \cup i$}
+%\WHILE{$|\mathcal{S}| \leq N_T$}
+%\STATE{\textbf{Formulate:} $\mathbf{C}$ based on (\ref{mca_1:2})}
+%\STATE{\textbf{Search:} $\displaystyle i = \arg \max_l | e^l_{\lambda_{max}} | \ \forall \ e^l_{\lambda_{max}} \in \mathbf{e}_{\lambda_{max}}$}
+%\STATE{\textbf{Update:} $\mathcal{S} = \mathcal{S} \cup i$}
+%\ENDWHILE
+%\caption{Eigen vector based User Selection}
+%\label{algorithm_3}
+%\end{algorithm}

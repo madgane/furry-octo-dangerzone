@@ -1,0 +1,51 @@
+
+\documentclass[a4paper,11pt,draft,fleqn,onecolumn]{report}
+
+\input{./../References/packages_file}
+
+\begin{document}
+
+\input{./../References/shortcut_commands}
+
+\section{Introduction}
+
+\section{System Model}
+
+\input{system_model}
+
+\section{Single BS User Scheduling}
+
+The user selection scheme for MU-MIMO transmission performs better when the user \inmt{k \in \mcxy{U}{b}} channels are uncorrelated. The uncorrelated channel constraint helps in decoupling the users data streams with the help of precoders thereby providing interference free transmission. The selection of users with two different objective is studied in this section namely, capacity achieving and fairness based queue size reduction.
+
+\subsection{Max-Throughput based User Scheduling}
+
+The selection methods with the objective of maximizing the overall throughput is considered in this section. The algorithms mentioned here are classified based on the performance and complexity. The complexity involved is lowered by reducing the operations involved in calculating the metric used for comparison.
+
+\subsubsection{Eigen vector based User Selection}
+
+\input{max_capacity_algos_1}
+
+\subsubsection{Selection based on Reduced Null Space Gain}
+
+\input{max_capacity_algos_2}
+
+\subsection{Queue based User Scheduling}
+
+\section{Multi BS User Scheduling}
+
+\subsection{Iterative User Scheduling}
+
+\subsection{Coordinate User Scheduling}
+
+\section{Numerical Results}
+
+\subsection{Single BS-US}
+
+\subsection{Multi BS-US}
+
+\section{Conclusion}
+
+\bibliographystyle{ieeetr}
+\bibliography{./../Library/kirja_survey}
+
+\end{document}

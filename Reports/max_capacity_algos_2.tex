@@ -1,0 +1,29 @@
+This section deals with the user selection by minimizing the complexity involved in the metric calculation. The proposed method provides an alternative way to achieve the null space projections. Assuming the set $\mathcal{S}$ is not empty, we need to find a user in $\mathcal{K}$ whose channel vector is not in the subspace formed by the channel vectors of $\mathcal{S}$. This is achieved by selecting the users whose projections on to the null space is maximum \cite{traniterative,zhang2007user,sun2009eigenmode}.
+
+The null space projections can be approximated by estimating the product of perpendicular distance from each unit vectors along the channel vectors in $\mathcal{S}$ to the given $i^{\mathrm{th}}$ user channel.
+\begin{eqnarray}
+\mathbf{U} &=& \left [ \frac{\mathbf{h}^T_i}{\|\mathbf{h}_i\|},...,\frac{\mathbf{h}^T_j}{\|\mathbf{h}_j\|}  \right ], \ \forall \ i,j \in \mathcal{S} \\
+\mathbf{g}_l &=& |\mathbf{U}^H \mathbf{h}^T_l| \ \forall \ l \in \mathcal{K}
+\label{prod_of_perp_1}
+\end{eqnarray}
+where $\mathbf{g}_l$ is a vector which contains the projection gains in the direction of unit vectors $\mathbf{U}$. Since the given user channel vector $\mathbf{h}_l$ is projected on to each user direction from $\mathcal{S}$, the norm $\|\mathbf{h}_l\|$ is subtracted from the projection independently to find the perpendicular displacement of the given vector from the existing direction.
+\begin{equation}
+m_l = \displaystyle \prod \left \lbrace \|\mathbf{h}_l\| \mathbf{1}_{|\mathcal{S}|} - \mathbf{g}_l \right \rbrace \ \forall \ l \in \mathcal{K}
+\label{prod_of_perp_2}
+\end{equation}
+where $\mathbf{1}_{|\mathcal{S}|}$ is a vector with $1$ of size $|\mathcal{S}| \times 1$. This product measures the gain achieved by projecting the given vector $\mathbf{h}_l$ vector over the null space of the vectors formed by the channel vectors of the users in the set $\mathcal{S}$. If we assume that user $l$ is in the direction of user $k \in \mathcal{S}$, then $\mathbf{g}_l$ has an entry at $k^{\mathrm{th}}$ index which has $\|\mathbf{h}_l\|$ as governed by (\ref{prod_of_perp_1}). By using (\ref{prod_of_perp_2}), the value of $m_l$ leads to $0$ due to the fact that the $k^{\mathrm{th}}$ entry is the same as that of the norm of the channel vector $\mathbf{h}_l$. This scheme reduces the operations involved in estimating the performance metric $\mathbf{m}$ based on which the users are selected. Since the perpendicular distance is always minimal distance between the two vectors, metric $\mathbf{m}$ is dominated by the least separation from the unit vector direction of $\mathcal{S}$. This method is briefed in Algorithm \ref{algorithm_2}.
+
+%\begin{algorithm}
+%\caption{Selection based on reduced Null Space Gain}
+%\label{algorithm_2}
+%\begin{algorithmic}
+%\STATE{\textbf{Initialize:} $\mathcal{S} = \{\emptyset\}$}
+%\STATE{\textbf{Search:} $\displaystyle i = \arg \max_l \| \mathbf{h}_l \| \ \forall \ l \in \mathcal{K}$}
+%\STATE{\textbf{Update:} $\mathcal{S} = \mathcal{S} \cup i$}
+%\WHILE{$|\mathcal{S}| \leq N_T$}
+%\STATE{\textbf{Evaluate:} $m_l \ \forall \ l \in \mathcal{K}$ using (\ref{prod_of_perp_1}) and (\ref{prod_of_perp_2})}
+%\STATE{\textbf{Search:} $\displaystyle i = \arg \max_l m_l$}
+%\STATE{\textbf{Update:} $\mathcal{S} = \mathcal{S} \cup i$}
+%\ENDWHILE
+%\end{algorithmic}
+%\end{algorithm}
