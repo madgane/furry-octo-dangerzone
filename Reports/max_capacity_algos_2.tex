@@ -1,17 +1,41 @@
-This section deals with the user selection by minimizing the complexity involved in the metric calculation. The proposed method provides an alternative way to achieve the null space projections. Assuming the set $\mathcal{S}$ is not empty, we need to find a user in $\mathcal{K}$ whose channel vector is not in the subspace formed by the channel vectors of $\mathcal{S}$. This is achieved by selecting the users whose projections on to the null space is maximum \cite{traniterative,zhang2007user,sun2009eigenmode}.
 
-The null space projections can be approximated by estimating the product of perpendicular distance from each unit vectors along the channel vectors in $\mathcal{S}$ to the given $i^{\mathrm{th}}$ user channel.
-\begin{eqnarray}
-\mathbf{U} &=& \left [ \frac{\mathbf{h}^T_i}{\|\mathbf{h}_i\|},...,\frac{\mathbf{h}^T_j}{\|\mathbf{h}_j\|}  \right ], \ \forall \ i,j \in \mathcal{S} \\
-\mathbf{g}_l &=& |\mathbf{U}^H \mathbf{h}^T_l| \ \forall \ l \in \mathcal{K}
-\label{prod_of_perp_1}
-\end{eqnarray}
-where $\mathbf{g}_l$ is a vector which contains the projection gains in the direction of unit vectors $\mathbf{U}$. Since the given user channel vector $\mathbf{h}_l$ is projected on to each user direction from $\mathcal{S}$, the norm $\|\mathbf{h}_l\|$ is subtracted from the projection independently to find the perpendicular displacement of the given vector from the existing direction.
+The objective of capacity achieving user selection and the complexity involved in implementing the same is considered. The proposed method provides and alternative way to achieve the null space calculations involved in the selection procedure. User selection based on QR based decomposition requires null space formulation in order to find the orthogonal subspace for the given vector channel were discussed in \cite{traniterative,zhang2007user,sun2009eigenmode}.
+
+The user channels are projected on to the null space of the existing users channel vectors in \me{\mc{S}} where \me{\mc{S}} represents the users selected for the current scheduling instant. The null space is approximated by the product of the vertical projection distance from the given channel vector to the existing users channel vectors in \me{\mc{S}}. The channel vector \me{\mvecxy{h}{i} \fall i \inm \mc{U}} is projected on to the matrix \me{\mbf{U}} formed by stacking the normalized channel vectors of the users in \me{\mc{S}}.
 \begin{equation}
-m_l = \displaystyle \prod \left \lbrace \|\mathbf{h}_l\| \mathbf{1}_{|\mathcal{S}|} - \mathbf{g}_l \right \rbrace \ \forall \ l \in \mathcal{K}
-\label{prod_of_perp_2}
+\mbf{U} = \left [ \, \frac{\mvecxy{h}{i}^\mrm{T}}{\gnorm{\mvecxy{h}{i}}}, \dotsc, \frac{\mvecxy{h}{j}^\mrm{T}}{\gnorm{\mvecxy{h}{j}}} \, \right ], \; \fall i,j \inm \mc{S}
+\label{mca2-e1}
 \end{equation}
-where $\mathbf{1}_{|\mathcal{S}|}$ is a vector with $1$ of size $|\mathcal{S}| \times 1$. This product measures the gain achieved by projecting the given vector $\mathbf{h}_l$ vector over the null space of the vectors formed by the channel vectors of the users in the set $\mathcal{S}$. If we assume that user $l$ is in the direction of user $k \in \mathcal{S}$, then $\mathbf{g}_l$ has an entry at $k^{\mathrm{th}}$ index which has $\|\mathbf{h}_l\|$ as governed by (\ref{prod_of_perp_1}). By using (\ref{prod_of_perp_2}), the value of $m_l$ leads to $0$ due to the fact that the $k^{\mathrm{th}}$ entry is the same as that of the norm of the channel vector $\mathbf{h}_l$. This scheme reduces the operations involved in estimating the performance metric $\mathbf{m}$ based on which the users are selected. Since the perpendicular distance is always minimal distance between the two vectors, metric $\mathbf{m}$ is dominated by the least separation from the unit vector direction of $\mathcal{S}$. This method is briefed in Algorithm \ref{algorithm_2}.
+In order to find the vertical projection distance, channel vector of the users in \me{\mc{U}} is projected on \me{\mbf{U}} is  denoted by \me{\mbf{g}}. The vector \me{\mbf{g}} contains the projection gains of the given channel vector onto the normalized channel of the users in \me{\mc{S}} as
+\begin{equation}
+\mbf{g} = \mbf{U}^\mrm{T} \mvecxy{h}{i}, \fall i \inm \mc{U}
+\label{mca2-e2}
+\end{equation}
+The vertical projection distance is given by subtracting the norm of channel vector from the projection metric \me{\mbf{g}}. The null space projection is then obtained by multiplying the vertical projection distance from all the unit vectors from the given channel vector as
+\begin{equation}
+\msclxy{m}{i} = \prod^{\card{\mc{S}}}_{l = 1} \left ( \, \gnorm{\mvecxy{h}{i}} - \card{g_l} \, \right ), \fall i \inm \mc{U}
+\label{mca2-e3}
+\end{equation}
+where \me{g_l} represents \me{l^\mrm{th}} element in \me{\mbf{g}} and \me{\msclxy{m}{i}} denotes the null space projection of user \me{i} on to the existing user set \me{\mc{S}}.
+
+The product measures the gain achieved by projecting the vector \me{\mvecxy{h}{i}} over the null space of the vectors formed by the channel vectors of users in the set \me{\mc{S}}. The product yields \me{0} when the vector \me{\mvecxy{h}{i}} is in the direction of the unit channel vectors in \me{\mbf{U}}. The product will not provide \me{0} when it is collinear with any two vectors in \me{\mbf{U}} as given by null space. Even though this method provides an approximation for null space, performance achieved by this scheme is closer to that of the selection scheme achieved by null space based projections discussed in \cite{sus2006zfbf,icsps2010}. The pseudo code is briefed in the Algorithm. \ref{mca2-a1}.
+
+\begin{algorithm}
+ \SetAlgoLined
+ \DontPrintSemicolon
+ \KwIn{\me{\mvecxy{h}{k} \fall k \inm \mc{U} }}
+ \KwData{\me{\mc{S} = \emptyset, \, \mbf{U} = [\,]}}
+ \While{\me{\card{S} \leq N_\mrm{T}}}{
+ \ForEach{\me{ i \inm \{1,2,\dotsc,K\}}}{
+ formulate \me{\mbf{U}} using \eqref{mca2-e1} \;
+ calculate \me{\msclxy{m}{i}} using \eqref{mca2-e2}, \eqref{mca2-e3} \;
+ }
+ select user \me{\displaystyle k = \arg \max_i \msclxy{m}{i}} \;
+ \me{\mc{S} = \{ \, \mc{S} \cup k \, \}} \;
+ }
+ \caption{Selection based on Reduced Null Space Gain}
+ \label{mca2-a1}
+\end{algorithm}
 
 %\begin{algorithm}
 %\caption{Selection based on reduced Null Space Gain}

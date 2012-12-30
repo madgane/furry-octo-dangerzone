@@ -1,0 +1,12 @@
+
+User selection which has the objective of reducing the expected queue of each user select users with higher queue backlogs. The selection strategy based on queue and the channel condition is discussed extensively in \cite{neely2012stability}. The queue based selection based on Lyapunov drift reduction along with power reduction is also discussed. The performance of those schemes are well suited for single user MIMO (SU-MIMO) where the entire spatial dimension is allotted for a single user. 
+
+In case of MU-MIMO, the users sharing spatial dimension will share the power and moreover interfere with each other unless precoder decouples the transmitted data. In order to decouple the transmitted data, the channel of the users in \me{\mc{S}} should be uncorrelated spatially. Once precoders are designed, power allocation for each users is performed based on queues and the channel condition in order to minimize the expected queue length for each users.
+
+Let \me{\mbf{Q}_i(n)} represents the backlog packets at \me{n^\mrm{th}} instant and \me{\mbf{b}_i(n)} represents the transmission bits at \me{n^\mrm{th}} instant for \me{i^\mrm{th}} user. Following the optimization strategy as given in \cite{neely2012stability} based on Lyapunov stability, the objective is to select the user set \me{\mc{S}} which maximizes the following
+\begin{eqnarray}
+&\displaystyle \max_{\mc{S} \inm \mc{U}} \, \sum_{i \inm \mc{S}}\mbf{Q}_i(n) \, \mbf{b}_i(n) \\
+&\displaystyle \mrm{subject \: to,} \quad \card{\mc{S}} \leq N_\mrm{T}
+\label{qba1-e1}
+\end{eqnarray}  
+The above problem is difficult to solve due to the constraint \eqref{qba1-e1} which casts it as a combinatorial search problem.

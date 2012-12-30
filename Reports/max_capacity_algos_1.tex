@@ -1,31 +1,36 @@
 
-This section addresses the question of how the performance can be improved by knowing the channel inner product. The inner product matrix is already discussed in the optimization objective in (\ref{opt_eqn}). Matrix $\mathbf{U}^H \mathbf{U}$ provides the inner product between all the channel vectors in $\mathcal{K}$. The objective as posed is to maximize the volume of the parallelopipe by selecting the binary matrix $\mathbf{X}$  with ones at the desired users. The metric used to determine the degenerate subspace is given by
-\begin{ceq}
-\mathbf{C}_{i,j} = \det{\left ( \left [\mathbf{h}^T_i \ \mathbf{h}^T_j]^H [\mathbf{h}^T_i \ \mathbf{h}^T_j \right ] \right )}
-\label{mca_1:1}
-\end{ceq}
-where $i,j$ correspond to the user indices. The entry $\mathbf{C}_{i,j}$ provides a measure of the volume enclosed by the vectors $\mathbf{h}_i$ and $\mathbf{h}_j$. The matrix $\mathbf{C}$ which is symmetric, can be decomposed into a diagonal form by unitary matrix $\mathbf{E}$ which is then represented by $\mathbf{E} \mathbf{\Lambda} \mathbf{E}^H$. Matrix $\mathbf{E}$ is represented as the matrix of $\mathbf{e}$ vectors and the diagonal matrix $\mathbf{\Lambda}$ contains the corresponding eigen-values in the diagonal.
+The main objective of capacity achieving MU-MIMO transmission is to select the users whose channel vectors are uncorrelated. Uncorrelated channels can be de-coupled easily to facilitate interference free transmission with the use of precoders. The measure of uncorrelated vectors can be obtained by finding determinant of the inner product of stacked  channel vectors. The capacity achieving user selection is carried out by forming a matrix \me{\mbf{M}} of size \me{K \times K} where \me{K = \card{\mcxy{U}{1}} = \card{\mc{U}}} which describes the number of users in a given BS.
 
-The selection is carried out by selecting the user whose channel vector forms the maximum volume with all other users in the system and the existing users in $\mathcal{S}$. This is achieved by selecting the maximum index of the maximum eigen vector of the matrix $\mathbf{C}$ as discussed in \cite{saaty2008decision}. The index of the maximum element in $\mathbf{e}_{\lambda_{max}}$ corresponds to the user index to be selected for $\mathcal{S}$ where $\lambda_{max}$ is the index corresponding to the maximum eigen-value in the diagonal elements of $\mathbf{\Lambda}$.
-
-Once the set $\mathcal{S} \neq \{ \emptyset \}$, (\ref{mca_1:1}) is modified to include the channel vectors $\mathbf{h}_k$ of users in the set $\forall \ k \in \mathcal{S}$ as
+The matrix \me{\mbf{M}} is populated with the metric which holds information about the co-existence measure between the users corresponding to the \me{i^{\mrm{th}}} row and \me{j^{\mrm{th}}} column. The metric also includes the channel vectors of users already selected for transmission at a given scheduling resource. The metric used at each element of the matrix \me{\mbf{M}} is given by
 \begin{eqnarray}
-\mathbf{S} &=& [\mathbf{h}^T_a \ \mathbf{h}^T_b \ ... \ \mathbf{h}^T_f] \ \forall \ a,b,...,f \in \mathcal{S} \\
-\mathbf{C}_{i,j} &=& \det{\left ( \left [ \mathbf{S} \ \mathbf{h}^T_i \ \mathbf{h}^T_j]^H [\mathbf{S} \ \mathbf{h}^T_i \ \mathbf{h}^T_j \right ] \right ) }
-\label{mca_1:2}
+\mbf{T} &=& \left [ \mbf{T}_\mrm{o} \; \mvecxy{h}{i}^\mrm{T} \; \mvecxy{h}{j}^\mrm{T}  \right ] \\
+\msclxyz{M}{i}{j} &=& \det{\left ( \mbf{T}^{\mrm{H}} \; \mbf{T} \right )} \label{mca1-e1:2}
+\label{mca1-e1}
 \end{eqnarray}
-with the updated matrix $\mathbf{C}$, the same procedure is carried out as earlier to arrive at the next user. This process is then repeated by updating (\ref{mca_1:2}) to find the remaining users which is explained briefly in Algorithm \ref{algorithm_3}, where $e^l_{\lambda_{max}}$ is the $l^{\mathrm{th}}$ entry in the vector $\mathbf{e}_{\lambda_{max}}$. Since initial selection is based on the pairwise determinant metric, users are selected based on maximizing the area over the remaining set of users in $\{ \mathcal{K} \backslash \mathcal{S} \}$ at each iteration of user search.
+where \me{\mbf{T}_\mrm{o}} denotes the stacked channel vectors of users belonging to the transmission set \me{\mc{S}, \, \card{\mc{S}} \leq N_\mrm{T}} at a given scheduling instant. The set \me{\mc{S}} is initialized with \me{\emptyset} and users are included in the set incrementally. Once the matrix \me{\mbf{M}} is populated, a user is selected based on the method followed in analytic hierarchy process (AHP) as in \cite{saaty2008decision}. The matrix \me{\mbf{M} \succeq 0}, Eigen value decomposition (EVD) decomposes the matrix into \me{\mbf{P} \, \mbf{D} \, \mbf{P}^\mrm{T}} where \me{\mbf{P}} is a unitary matrix consists of Eigen vectors of \me{\mbf{M}} and \me{\mbf{D}} is a diagonal matrix having Eigen values on its diagonal entries.
 
-%\begin{algorithm}[H]
-%\STATE{\textbf{Initialize:} $\mathcal{S} = \{\emptyset\}$}
-%\STATE{\textbf{Formulate:} $\mathbf{C}$ based on (\ref{mca_1:1})}
-%\STATE{\textbf{Search:} $\displaystyle i = \arg \max_l | e^l_{\lambda_{max}} | \ \forall \ e^l_{\lambda_{max}} \in \mathbf{e}_{\lambda_{max}}$}
-%\STATE{\textbf{Update:} $\mathcal{S} = \mathcal{S} \cup i$}
-%\WHILE{$|\mathcal{S}| \leq N_T$}
-%\STATE{\textbf{Formulate:} $\mathbf{C}$ based on (\ref{mca_1:2})}
-%\STATE{\textbf{Search:} $\displaystyle i = \arg \max_l | e^l_{\lambda_{max}} | \ \forall \ e^l_{\lambda_{max}} \in \mathbf{e}_{\lambda_{max}}$}
-%\STATE{\textbf{Update:} $\mathcal{S} = \mathcal{S} \cup i$}
-%\ENDWHILE
-%\caption{Eigen vector based User Selection}
-%\label{algorithm_3}
-%\end{algorithm}
+Let \me{\msclxyz{D}{k}{k}} represents the maximum Eigen value at \me{k^{\mrm{th}}} index and the corresponding Eigen vector is given by \me{\mvecxy{p}{k}}. Since each entry \me{\msclxyz{p}{i}{k} \fall i \inm \{1,2,\dotsc,K \}} has unequal gains which corresponds to the significance of the entry in achieving the corresponding Eigen gain, user \me{i} is selected with
+\begin{eqnarray}
+i &=& \arg \max_{\mathrm{i}} \norm{\msclxyz{p}{i}{k}}{2} \label{mca1-e2:1} \\
+\mc{S} &=& \left \lbrace \, \mc{S} \, \cup \, i \, \right \rbrace.
+\label{mca1-e2}
+\end{eqnarray}
+
+Selection is carried out in an iterative manner with the stopping criterion given by \me{\card{\mc{S}} = N_\mrm{T}} as detailed in Algorithm. \ref{mca1-a1}. Precoding is performed over the channels of the users in \me{\mc{S}} which forms the transmission set. Precoding is either zero-forcing (ZF) with water-filling power allocation (WF-PA) as in \cite{tse2005fundamentals} or weighted sum rate maximization using weighted minimum mean squared error (W-MMSE) as given in \cite{wmmse_shi} with the power constraint as given in \eqref{sm-e2}.
+
+\begin{algorithm}
+ \SetAlgoLined
+ \DontPrintSemicolon
+ \KwIn{\me{\mvecxy{h}{k} \fall k \inm \mc{U} }}
+ \KwData{\me{\mc{S} = \emptyset, \, \mbf{M}, \, \mbf{T}_\mrm{o} = [\,]}}
+ \While{\me{\card{S} \leq N_\mrm{T}}}{
+ \ForEach{\me{ \msclxyz{M}{i}{j}, \, \mrm{where} \, i,j \inm \{1,2,\dotsc,K\}}}{
+ formulate \me{\msclxyz{M}{i}{j}} using \eqref{mca1-e1:2} \;
+ }
+ perform EVD as \me{\mbf{M} = \mbf{P} \, \mbf{D} \, \mbf{P}^\mrm{T}} \;
+ select user \me{i} using \eqref{mca1-e2:1} \;
+ \me{\mc{S} = \{ \, \mc{S} \cup i \, \}}, \me{\mbf{T}_{\mrm{o}} = \left [\, \mbf{T}_{\mrm{o}} \, \mvecxy{h}{i} \, \right ]} \;
+ }
+ \caption{Eigen Vector based User Selection}
+ \label{mca1-a1}
+\end{algorithm}
