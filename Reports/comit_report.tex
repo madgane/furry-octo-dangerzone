@@ -17,7 +17,7 @@
 
 The user selection scheme for MU-MIMO transmission performs better when the user \inmt{k \in \mcxy{U}{b}} channels are uncorrelated. The uncorrelated channel constraint helps in decoupling the users data streams with the help of precoders thereby providing interference free transmission. The selection of users with two different objective is studied in this section namely, capacity achieving and fairness based queue size reduction. The channel represented by \me{\mvecxyz{h}{b}{k}} is given by \me{\mvecxy{h}{k}} by dropping the subscript corresponds to BS \me{b = 1}.
 
-\subsection{Max-Throughput based User Scheduling}
+\subsection{Max-Throughput based User Scheduling} \label{mtbus}
 
 The selection methods with the objective of maximizing the overall throughput is considered in this section. The algorithms mentioned here are classified based on the performance and complexity. The complexity involved is lowered by reducing the operations involved in calculating the metric used for comparison.
 
@@ -29,9 +29,9 @@ The selection methods with the objective of maximizing the overall throughput is
 
 \input{max_capacity_algos_2}
 
-\subsection{Queue based User Scheduling}
+\subsection{Queue based User Scheduling} \label{qbus}
 
-In this section, we discuss the selection schemes which considers the queue backlogs of each user and aims at minimizing it for each users in the set \me{\mc{U}}. Even though the users are selected based on the objective of minimizing the queues, power allocation based on water-filling (WF-PA) for zero-forcing (ZF) precoders has the objective of maximizing the sum capacity. The WF-PA scheme is replaced with the queue based power allocation scheme which uses queue weighted sum rate maximization objective (QW-PA). 
+In this section, we discuss the selection schemes which considers the queue backlogs of each user and aims at minimizing it for each users in the set \me{\mc{U}}. Even though the users are selected based on the objective of minimizing the queues, power allocation based on water-filling (WF-PA) for zero-forcing (ZF) precoders has the objective of maximizing the sum capacity. The WF-PA scheme is replaced with the queue based power allocation scheme which uses queue weighted sum rate maximization objective (QW-PA).
 
 The W-MMSE based precoding scheme is also analyzed in this section for the precoder design with the expected queue minimizing objective. The following section discusses two selection schemes with the objective of reducing the queues namely weighted user selection and percentile proportional fair scheduling scheme.
 
