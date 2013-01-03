@@ -11,8 +11,8 @@ Let \me{\mbf{Q}_i(n)} represents the backlog packets at \me{n^\mrm{th}} instant 
 \end{eqnarray}
 The above problem is difficult to solve due to the constraint \eqref{qba1-e1} which casts it as a combinatorial search problem. The suboptimal solution is proposed by considering user selection in an incremental manner as seen in Sect. \ref{mtbus}. Since \me{\mbf{b}(n)} is given by \me{ \textstyle \log \left \lbrace 1 + \frac{\gnorm{\mvecxy{h}{i}}^2}{N_\mrm{0}} \right \rbrace } at \me{n^\mrm{th}} instant, the optimization function for the user \me{i} is given by
 \begin{eqnarray}
-&\displaystyle \max_{\fall i \inm \mc{U}} \, \mbf{Q}_i \, \log \left \lbrace 1 + \frac{P_\mrm{i}\gnorm{\mvecxy{h}{i}}^2}{N_\mrm{0}} \right \rbrace \\
-&\displaystyle \max_{\fall i \inm \mc{U}} \, \mbf{Q}_i \, \left ( \, 2 \log \left \lbrace P_\mrm{i}\gnorm{\mvecxy{h}{i}} \right \rbrace - \log \left \lbrace N_\mrm{0} \right \rbrace \right )
+&\displaystyle \max_{\fall i \inm \mc{U}} \, \mbf{Q}_i \, \log \left \lbrace 1 + \frac{P_\mrm{i} \; \gnorm{\mvecxy{h}{i}}^2}{N_\mrm{0}} \right \rbrace \\
+&\displaystyle \max_{\fall i \inm \mc{U}} \, \mbf{Q}_i \, \left [ \; 2 \, \log \left \lbrace P_\mrm{i} \; \gnorm{\mvecxy{h}{i}} \right \rbrace - \log \left \lbrace N_\mrm{0} \right \rbrace \; \right ]
 \label{qba1-e2}
 \end{eqnarray}
 where \eqref{qba1-e2} is based on high-SNR approximation. Since \me{N_\mrm{0}} is constant and can be dropped, the approximated objective is given by \me{\max_i \mbf{Q}_i \: \mvecxy{h}{i}} where \me{\log \{x \} \approx x}. The sharing of total transmission power among \me{\mc{S}} is not known during user selection, the optimization objective includes only the channel norm with path loss in the final formulation.
