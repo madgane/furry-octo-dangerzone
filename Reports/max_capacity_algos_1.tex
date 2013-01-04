@@ -3,15 +3,15 @@ The main objective of capacity achieving MU-MIMO transmission is to select the u
 
 The matrix \me{\mbf{M}} is populated with the metric which holds information about the co-existence measure between the users corresponding to the \me{i^{\mrm{th}}} row and \me{j^{\mrm{th}}} column. The metric also includes the channel vectors of users already selected for transmission at a given scheduling resource. The metric used at each element of the matrix \me{\mbf{M}} is given by
 \begin{eqnarray}
-\mbf{T} &=& \left [ \mbf{T}_\mrm{o} \; \mvecxy{h}{i}^\mrm{T} \; \mvecxy{h}{j}^\mrm{T}  \right ] \\
-\msclxyz{M}{i}{j} &=& \det{\left ( \mbf{T}^{\mrm{H}} \; \mbf{T} \right )} \label{mca1-e1:2}
+\mbf{T} &=& \left [\,\mbf{T}_\mrm{o} \; \mvecxy{h}{i}^\mrm{T} \; \mvecxy{h}{j}^\mrm{T} \, \right ] \\
+\msclxyz{M}{i}{j} &=& \det{\left ( \, \mbf{T}^{\mrm{H}} \; \mbf{T} \, \right )} \label{mca1-e1:2}
 \label{mca1-e1}
 \end{eqnarray}
 where \me{\mbf{T}_\mrm{o}} denotes the stacked channel vectors of users belonging to the transmission set \me{\mc{S}, \, \card{\mc{S}} \leq N_\mrm{T}} at a given scheduling instant. The set \me{\mc{S}} is initialized with \me{\emptyset} and users are included in the set incrementally. Once the matrix \me{\mbf{M}} is populated, a user is selected based on the method followed in analytic hierarchy process (AHP) as in \cite{saaty2008decision}. The matrix \me{\mbf{M} \succeq 0}, Eigen value decomposition (EVD) decomposes the matrix into \me{\mbf{P} \, \mbf{D} \, \mbf{P}^\mrm{T}} where \me{\mbf{P}} is a unitary matrix consists of Eigen vectors of \me{\mbf{M}} and \me{\mbf{D}} is a diagonal matrix having Eigen values on its diagonal entries.
 
 Let \me{\msclxyz{D}{k}{k}} represents the maximum Eigen value at \me{k^{\mrm{th}}} index and the corresponding Eigen vector is given by \me{\mvecxy{p}{k}}. Since each entry \me{\msclxyz{p}{i}{k} \fall i \inm \{1,2,\dotsc,K \}} has unequal gains which corresponds to the significance of the entry in achieving the corresponding Eigen gain, user \me{i} is selected with
 \begin{eqnarray}
-i &=& \arg \max_{\mathrm{i}} \norm{\msclxyz{p}{i}{k}}{2} \label{mca1-e2:1} \\
+i &=& \argmax_{\mathrm{i}} \norm{\msclxyz{p}{i}{k}}{2} \label{mca1-e2:1} \\
 \mc{S} &=& \left \lbrace \, \mc{S} \, \cup \, i \, \right \rbrace.
 \label{mca1-e2}
 \end{eqnarray}

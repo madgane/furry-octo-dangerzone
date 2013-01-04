@@ -1,7 +1,7 @@
 
 The system model considers \me{\mscrmxy{N}{B}} BSs, each has \me{\mscrmxy{N}{T}} transmit antennas and \me{K} users with a single receive antenna. The set \me{\mcxy{U}{b}} denotes the set of users linked to BS \me{b} where \me{b \in \{1,2,\dotsc,\mscrmxy{N}{B}\}}. The set \me{\mc{U}} given by \me{\mcxy{U}{b} \sset \mc{U}} represents the total users in the system as represented by \me{\card{\mc{U}} = K}. The set \me{\mcxy{B}{k} \sset \mc{B} = \{1,2,\dotsc,\mscrmxy{N}{B}\}} represents the set of BSs transmitting for the user \me{k}. The cardinality of the set \me{ \card{\mcxy{B}{k}} \geq 1} represents the coordinated transmission from more than one BS in the system. The users are statically assigned to a BS in the single BS transmission scenario based on the pathloss measures. The received signal \me{\msclxy{y}{k}} of the user \me{k} consisting of both inter cell and intra cell interference is given by
 \begin{eqnarray}
-\msclxy{y}{k} = \underbrace{\sum_{\mtext{b} \inm \mcxy{B}{k}} \mvecxyz{h}{b}{k} \mvecxyz{x}{b}{k}}_{\mathclap{\text{desired term}}} \quad + \quad \overbrace{\sum_{\mtext{b} \inm \mcxy{B}{k}} \mvecxyz{h}{b}{k} \sum_{\mathclap{\mtext{i} \inm \mcxy{U}{b} \bs \mtext{k}}} \mvecxyz{x}{b}{i}}^{\mathclap{\text{intra cell interference terms}}} \quad + \quad \overbrace{\sum_{\mathclap{\mtext{b} \inm \mc{B} \bs \mcxy{B}{k}}} \mvecxyz{h}{b}{k} \sum_{\mtext{i} \inm \mcxy{U}{b}} \mvecxyz{x}{b}{i}}^{\mathclap{\text{inter cell interference terms}}} \quad + \quad \msclxy{n}{k}
+\msclxy{y}{k} = \underbrace{\sum_{\mtext{b} \inm \mcxy{B}{k}} \mvecxyz{h}{b}{k} \mvecxyz{x}{b}{k}}_{\mathclap{\text{desired term}}} \quad + \quad \overbrace{\sum_{\mtext{b} \inm \mcxy{B}{k}} \mvecxyz{h}{b}{k} \sum_{\mathclap{\mtext{i} \inm \mcxy{U}{b} \bs \mtext{k}}} \mvecxyz{x}{b}{i}}^{\mathclap{\text{intra cell interference terms}}} \quad + \quad \overbrace{\sum_{\mathclap{\mtext{c} \inm \mc{B} \bs \mcxy{B}{k}}} \mvecxyz{h}{c}{k} \sum_{\mtext{j} \inm \mcxy{U}{c}} \mvecxyz{x}{c}{j}}^{\mathclap{\text{inter cell interference terms}}} \quad + \quad \msclxy{n}{k}
 \label{sm-e1}
 \end{eqnarray}
 
@@ -9,7 +9,7 @@ where the vector \me{\mvecxyz{x}{b}{k} \inm \mathds{C}^{\mscrmxy{N}{T}}} represe
 
 The transmitted symbol \me{\mvecxyz{x}{b}{k}} for the user \inmt{k} from BS \inmt{b} is given by \me{\mvecxyz{x}{b}{k} = \mvecxyz{m}{b}{k} \, \msclxy{d}{k}} where \me{\mvecxyz{m}{b}{k}} is the precoder used by the BS \inmt{b} for user \inmt{k} and \me{\msclxy{d}{k}} denotes the data meant for user \inmt{k} with \me{\mbf{E} [\, \card{d}^2 ] = 1}. The total power used by the transmitter is given by
 \begin{equation}
-\sum_{k \inm \mcxy{U}{b}} \mrm{Tr} \left ( \mvecxyz{x}{b}{k} \, \mvecxyz{x}{b}{k}^{\mrm{H}} \right ) \leq \mrm{P}_{t} 
+\sum_{k \inm \mcxy{U}{b}} \mrm{Tr} \left ( \mvecxyz{x}{b}{k} \, \mvecxyz{x}{b}{k}^{\mrm{H}} \right ) \leq \mrm{P}_{t}
 \label{sm-e2}
 \end{equation}
 

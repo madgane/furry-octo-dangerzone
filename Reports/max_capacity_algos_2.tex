@@ -30,24 +30,9 @@ The product measures the gain achieved by projecting the vector \me{\mvecxy{h}{i
  formulate \me{\mbf{U}} using \eqref{mca2-e1} \;
  calculate \me{\msclxy{m}{i}} using \eqref{mca2-e2}, \eqref{mca2-e3} \;
  }
- select user \me{\displaystyle k = \arg \max_i \msclxy{m}{i}} \;
+ select user \me{\displaystyle k = \argmax_i \: \msclxy{m}{i}} \;
  \me{\mc{S} = \{ \, \mc{S} \cup k \, \}} \;
  }
  \caption{Selection based on Reduced Null Space Gain}
  \label{mca2-a1}
 \end{algorithm}
-
-%\begin{algorithm}
-%\caption{Selection based on reduced Null Space Gain}
-%\label{algorithm_2}
-%\begin{algorithmic}
-%\STATE{\textbf{Initialize:} $\mathcal{S} = \{\emptyset\}$}
-%\STATE{\textbf{Search:} $\displaystyle i = \arg \max_l \| \mathbf{h}_l \| \ \forall \ l \in \mathcal{K}$}
-%\STATE{\textbf{Update:} $\mathcal{S} = \mathcal{S} \cup i$}
-%\WHILE{$|\mathcal{S}| \leq N_T$}
-%\STATE{\textbf{Evaluate:} $m_l \ \forall \ l \in \mathcal{K}$ using (\ref{prod_of_perp_1}) and (\ref{prod_of_perp_2})}
-%\STATE{\textbf{Search:} $\displaystyle i = \arg \max_l m_l$}
-%\STATE{\textbf{Update:} $\mathcal{S} = \mathcal{S} \cup i$}
-%\ENDWHILE
-%\end{algorithmic}
-%\end{algorithm}
