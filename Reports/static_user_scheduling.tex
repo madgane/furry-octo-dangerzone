@@ -1,39 +1,42 @@
 
 This section discusses the user selection strategy performed over the set \me{\mc{U}_b \sset \mc{U}} which represents the users linked to BS \me{b}. The selection performed over the associated user set \me{\mc{U}_b, \fall b \inm \mc{B}} provides the transmission set \me{\mc{S}_b} of BS \me{b} which needs to be signalled to all BSs in the set \me{\{ \mc{B} \bs b \}}. The selection is carried out in an iterative manner with the limited signaling between the cooperating BSs to maximize the overall sum throughput.
 
-In multi-BS scenario, the available spatial dimension \me{N_\mrm{T}} is shared between the transmission of information to the desired cell users and minimizing the interference created to the neighboring cells. This is performed by sharing the available spatial freedom \me{N_\mrm{T}} over the cooperating BSs in \me{\mc{B}} by dividing the spatial dimension over \me{\card{\mc{B}}} as given by \me{\left \lfloor \frac{N_\mrm{T}}{N_\mrm{B}} \right \rfloor} with the assumption \me{N_\mrm{T} \geq N_\mrm{B}}. In order to discuss the scheme, let \me{\mc{S}^{i}_{\cup} = \{ \mc{S}_1 \cup \mc{S}_2 \cup \dotso \cup \mc{S}_{N_\mrm{B}} \}} represents the transmission user set of the network at \me{i^\mrm{th}} iteration and 
-\me{\mc{S}^i_{\cup,b} = \{ \mc{S}^i_{\cup} \bs \mc{S}_b \} } represents the transmission user set excluding BS \me{b}.
+In multi-BS scenario, the available spatial dimension \me{N_\mrm{T}} is shared between the transmission of information to the desired cell users and minimizing the interference created to the neighboring cells. This is performed by sharing the available spatial freedom \me{N_\mrm{T}} over the cooperating BSs in \me{\mc{B}} by dividing the spatial dimension over \me{\card{\mc{B}}} as given by \me{\left \lfloor \frac{N_\mrm{T}}{N_\mrm{B}} \right \rfloor} with the assumption \me{N_\mrm{T} \geq N_\mrm{B}}.
 
-To begin with, initialize \me{\mc{S}_j \fall j \inm \mc{B}} and \me{\mc{S}^i_{\cup}} to \me{\emptyset} at \me{i = 0}. Let us consider \me{\mc{B}_k} selects the transmission user set \me{\mc{S}_k} from \me{\mc{U}_k} based on QR based selection discussed in \cite{zhang2007user,sun2009eigenmode} or single BS user selection as discussed in Sect. \ref{sbus}. This information is used while selecting \me{\{\, \mc{S}_j \fall j \inm \mc{B} \bs k \, \}} in order to provide efficient transmission set \me{\mc{S}^i_{\cup}} at \me{i = 1} iteration instant. The sets in \me{\{\, \mc{S}_j \fall j \inm \mc{B} \bs k \, \}} is updated by selecting the users from the corresponding user set \me{\mc{U}_j} by the following metric
-\begin{eqnarray}
-\begin{array}{lll}
-\mbf{T}_{jj} &=& \left [ \; \mvecxyz{h}{j}{x} \; \right ], \, \fall x \inm \mc{S}_{j} \\
-\mbf{T}_j &=& \left [ \; \mvecxyz{h}{j}{l} \; \right ], \, \fall l \inm \mc{S}^i_{\cup,j} \\
-\mbf{T}_{j,m} &=& \left [ \; \mbf{T}_j \quad \mbf{T}_{jj} \quad \mvecxyz{h}{j}{m} \; \right ], \, m \inm \mc{U}_j \\
-d_m &=& \det{ \left ( \; \mbf{T}^\mrm{H}_{j,m} \, \mbf{T}_{j,m} \; \right ) }
+Let \me{\mc{S}_b} and \me{\mc{S}_{b,\mrm{H}}} be initialized with \me{\emptyset, \; \fall b \inm \mc{B}} where the later represents the user set selected during previous iteration for BS \me{b}. The scheduling is performed by a centralized server which updates the transmission user set or distributively by each BS by exchanging the transmission user set \me{\mc{S}_b} between them. To begin with, let us consider BS \me{\hat{b}} select the users from \me{\mc{U}_{\hat{b}}} while satisfying the cardinality constraint mentioned earlier. The selected user set \me{\mc{S}_{\hat{b}}} is broadcasted to all BS in \me{\mc{B}} to perform their respective selections. The exchanged information \me{\mc{S}_{\hat{b}}} is used by all BS in \me{\mc{B}} to select the users for transmission set \me{\mc{S}_j} of BS \me{j} using projection metric.
+\begin{equation}
+\begin{array}{lcl}
+d_k &=& \det \matbcont{\mbf{T}^\mrm{H} \mbf{T}} \\
+\mbf{T} &=& \matscont{\mbf{T}_\mrm{X} \; \mbf{T}_\mrm{D} \; \mvecxyz{h}{j}{i}}, \fall i \inm \mc{U}_j
 \end{array}
-\label{sus-iter0}
-\end{eqnarray} 
-where \me{\mbf{T}_j} matrix has the channel between BS \me{j} to the neighboring users in \me{\mc{S}^1_{
-\cup},j}, \me{\mbf{T}_{jj}} is the matrix with channel vectors of all the users already selected in BS \me{j}, and \me{d_m} represent the metric of \me{m^{\mrm{th}}} user in \me{\mc{U}_j}. The user set \me{\mc{S}_j} is updated with the user having maximum metric \me{u = \argmax_m \, d_m} as \me{\mc{S}_j = \{ \mc{S}_j \cup u\}} and \me{\mc{S}^i_{\cup}} is also updated with \me{\{\mc{S}^i_{\cup} \cup \mc{S}_j \}} once \me{\card{\mc{S}_j} = \left \lfloor \frac{N_\mrm{T}}{N_\mrm{B}} \right \rfloor} is achieved. This process is performed over all BSs in a sequential manner to complete one iteration. The second and further iterations are carried out for each BS \me{k} by setting \me{\mc{S}_k = \emptyset} and the new set of transmission user set \me{\mc{S}_k} is updated by using \eqref{sus-iter0}. The iterations are carried out till \me{\mc{S}^{i - 1}_{\cup} = \mc{S}^i_{\cup}} is achieved. The convergence is guaranteed since the search is over the closet set of channel vectors. The Algorithm \ref{sus-a1} describes the procedure of user selection for multi-BS in an iterative manner.
+\label{sus-e1}
+\end{equation}
+where \me{\mbf{T}} is estimated using \me{\mbf{T}_{\mrm{X}}} which corresponds to the stacked channel vectors between neighboring users and the BS \me{j} and \me{\mbf{T}_{\mrm{D}}} represents the stacked channel vectors of users already selected for transmission in the same BS \me{j} as given by
+\begin{equation}
+\begin{array}{lcl}
+\mbf{T}_{\mrm{D}} &=& \matscont{\mvecxyz{h}{j}{k} \dotso}, \fall k \inm \mc{S}_j \\
+\mbf{T}_{\mrm{X}} &=& \matscont{\mvecxyz{h}{j}{k} \dotso }, \fall k \inm \displaystyle \bigcup_{\mathclap{\fall b \inm \mc{B} \bs j}} \mc{S}_b.
+\end{array}
+\label{sus-e2}
+\end{equation}
+
+The user set \me{\mc{S}_j} is updated with the user having maximum metric \me{\hat{k} = \argmax_k \, d_k} as \me{\mc{S}_j = \setcont{\mc{S}_j \cup \hat{k}}} till the constraint \me{\card{\mc{S}_j} = \left \lfloor \frac{N_\mrm{T}}{N_\mrm{B}} \right \rfloor} is satisfied. This process is performed over all BSs in a sequential manner to complete one iteration. The second and further iterations are carried out for each BS \me{k} by setting \me{\mc{S}_k = \emptyset} and the new set of transmission user set \me{\mc{S}_k} is updated by using \eqref{sus-e1} until the sets are converged. The convergence is guaranteed since the search is over the closet set of channel vectors. The Algorithm \ref{sus-a1} describes the procedure of user selection for multi-BS in an iterative manner.
 \begin{algorithm}
  \SetAlgoLined
  \DontPrintSemicolon
- \KwIn{\me{\mvecxyz{h}{k}{i} \fall i \inm \mc{U}_k, \fall k \inm \mc{B}}}
- \KwData{iteration index \me{i = 1}, \me{\mc{S}^i_\cup = \emptyset}}
- \While{\me{\mc{S}^{i-1}_\cup \neq \mc{S}^i_\cup}}{
- \ForEach{\me{k \inm \mc{B}}}{
- \me{\mc{S}_k = \emptyset} \;
- \While{\me{\card{\mc{S}_k} \leq \left \lfloor \frac{N_\mrm{T}}{N_\mrm{B}} \right \rfloor }} {
- \ForEach{\me{ i \inm \mc{U}_k}}{
- evaluate \me{\msclxy{d}{i}} using \eqref{sus-iter0} \;
+ \KwIn{\me{\mvecxyz{h}{b}{i} \fall i \inm \mc{U}_b, \fall b \inm \mc{B}}}
+ \KwData{iteration index \me{i = 0}, \me{\mc{S}_b = \emptyset}, \me{\mc{S}_{b,\mrm{H}} = \emptyset}, \me{\fall b \inm \mc{B}}}
+ \While{\me{ \matbcont{\bigcup_{b} \mc{S}_{b,\mrm{H}} \neq \bigcup_b \mc{S}_b} \; \& \; \matbcont{\sum_b \card{\mc{S}_{b,\mrm{H}}} \neq 0}, \; \fall b \inm \mc{B}}}{
+ i = i + 1 \;
+ \ForEach{\me{b \inm \mc{B}}}{
+ \me{\mc{S}_b = \emptyset} \;
+ \ForEach{\me{k \inm \mc{U}_b}}{
+ evaluate \me{d_k} using \eqref{sus-e1} and \eqref{sus-e2}\;
  }
- select user \me{\displaystyle u = \argmax_i \: \msclxy{d}{i}} \;
- \me{\mc{S}_k = \{ \, \mc{S}_k \cup u \, \}} \;
+ find user \me{\hat{k} = \argmax_k \; d_k} \;
+ \me{\mc{S}_{\hat{b}} = \setcont{\mc{S}_{\hat{b}} \cup \hat{k}}} \;
  }
- \me{\mc{S}^i_\cup = \{ \mc{S}^i_\cup \cup \mc{S}_k \} } \;
- }
- \me{\mc{S}^{i + 1}_\cup = \mc{S}^{i}_\cup}, \me{i = i + 1} \;
+ \me{\mc{S}_{b,\mrm{H}} = \mc{S}_b,\; \fall b \inm \mc{B}} \;
  }
  \caption{Static user scheduling}
  \label{sus-a1}
