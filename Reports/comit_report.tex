@@ -12,7 +12,7 @@
 
 \input{system_model}
 
-\section{Single BS User Scheduling}
+\section{Single BS User Scheduling} \label{sbus}
 
 The user selection scheme for MU-MIMO transmission performs better when the user \inmt{k \in \mcxy{U}{b}} channels are uncorrelated. The uncorrelated channel constraint helps in decoupling the users data streams with the help of precoders thereby providing interference free transmission. The selection of users with two different objective is studied in this section namely, capacity achieving and fairness based queue size reduction. The channel represented by \me{\mvecxyz{h}{b}{k}} is given by \me{\mvecxy{h}{k}} by dropping the subscript corresponds to BS \me{b = 1}.
 
@@ -46,11 +46,13 @@ The W-MMSE based precoding scheme is also analyzed in this section for the preco
 
 The selection of users to maximize the system throughput with multiple BS is considered here. The scheduling schemes based on the user set over which the selection is carried out for multi-BS scenario is addressed in this section.
 
-\subsection{Static User Scheduling}
+\subsection{Static User Scheduling} \label{sus}
 
 \input{static_user_scheduling}
 
-\subsection{Coordinate User Scheduling}
+\subsection{Coordinate User Scheduling}\label{cus}
+
+\input{coordinate-user-selection}
 
 \section{Numerical Results}
 
