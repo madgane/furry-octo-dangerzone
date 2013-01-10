@@ -13,3 +13,6 @@ The transmitted symbol \me{\mvecxyz{x}{b}{k}} for the user \inmt{k} from BS \inm
 \label{sm-e2}
 \end{equation}
 
+The precoding scheme is based on weighted minimum mean squared error (W-MMSE) scheme discussed in \cite{wmmse_shi} or by combined zero-forcing (CZF) scheme by stacking the channel of users in the transmission set of all BSs in \me{\mc{B}} as discussed in \cite{spencer2004zero}. Once precoders are defined, power allocation is performed over precoders designed by CZF scheme to maximize the sum capacity. The power allocation is performed jointly while designing precoders in W-MMSE scheme.
+
+The scheduling schemes discussed are not limited to single receive antenna; it can be extended for multi antenna by treating each spatial streams as virtual users using singular value decomposition (SVD) over the channel matrix of users in \me{\mc{U}}. The precoder design using W-MMSE scheme is straight forward with the transmission user set selected based on scheduling schemes as it optimizes both transmit and receive beamformers jointly. The zero-forcing precoding is performed in an iterative manner by fixing the receive beamformers using MMSE receivers as discussed in \cite{antti_user_selection}. 

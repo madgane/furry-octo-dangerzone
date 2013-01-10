@@ -9,7 +9,7 @@ Let \me{\mc{S}_b} and \me{\mc{S}_{b,\mrm{H}}} are initialized to \me{\emptyset, 
 where \me{\{\, \hat{b},\hat{k} \,\} \: = \: \argmax_{b,k} \gnorm{\mvecxyz{h}{b}{k}}} represents the selection criterion for the first user. The second and there after will be selected based on finding the user whose channel vector is not on the same subspace (\me{\mvecxyz{h}{\hat{b}}{k}, \fall k}) for users linking to BS \me{\hat{b}} or on to the null space (\me{\mvecxyz{h}{b}{\hat{k}}}) for channel between users with BSs in \me{\{\, \mc{B} \bs \hat{b} \,\}}. The set \me{\mc{S}_j} for BS \me{j} is updated using \eqref{cus-e2} as
 \begin{equation}
 \begin{array}{lcl}
-D_{j,i} &=& \det \left ( \; \mbf{T}^{\mrm{H}} \mbf{T} \; \right ) \\
+D_{j,i} &=& \det \left ( \; \mbf{T}^{\mrm{H}} \; \mbf{T} \; \right ) \\
 \mbf{T} &=& \matscont{\mbf{T}_\mrm{X} \; \mbf{T}_\mrm{D} \; \mvecxyz{h}{j}{i}}, \fall i \inm \mc{U}
 \end{array}
 \label{cus-e2}
@@ -22,7 +22,7 @@ where \me{D_{j,i}} corresponds the the metric evaluated for the user \me{i} when
 \end{array}
 \label{cus-e3}
 \end{equation}
-where \me{\mbf{T}_\mrm{X}} corresponds to the stacked channel vectors of the channel between the current BS to the neighboring BSs users and \me{\mbf{T}_\mrm{D}} represents the stacked channel vectors of users in the transmission set of the current BS. The selection and association is then carried out by selecting the maximizing metric over the entire \me{\mbf{D}} matrix as 
+where \me{\mbf{T}_\mrm{X}} corresponds to the stacked channel vectors of the channel between the current BS to the neighboring BSs users and \me{\mbf{T}_\mrm{D}} represents the stacked channel vectors of users in the transmission set of the current BS. The selection and association is then carried out by selecting the maximizing metric over the entire \me{\mbf{D}} matrix as
 \begin{equation}
 \{ \, \hat{b},\hat{k} \,\} = \argmax_{i,j} \quad D_{i,j} \; \fall i \inm \mc{U} \text{ and } \fall j \inm \mc{B}
 \label{cus-e4}

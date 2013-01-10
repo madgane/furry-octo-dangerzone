@@ -6,7 +6,7 @@ In multi-BS scenario, the available spatial dimension \me{N_\mrm{T}} is shared b
 Let \me{\mc{S}_b} and \me{\mc{S}_{b,\mrm{H}}} be initialized with \me{\emptyset, \; \fall b \inm \mc{B}} where the later represents the user set selected during previous iteration for BS \me{b}. The scheduling is performed by a centralized server which updates the transmission user set or distributively by each BS by exchanging the transmission user set \me{\mc{S}_b} between them. To begin with, let us consider BS \me{\hat{b}} select the users from \me{\mc{U}_{\hat{b}}} while satisfying the cardinality constraint mentioned earlier. The selected user set \me{\mc{S}_{\hat{b}}} is broadcasted to all BS in \me{\mc{B}} to perform their respective selections. The exchanged information \me{\mc{S}_{\hat{b}}} is used by all BS in \me{\mc{B}} to select the users for transmission set \me{\mc{S}_j} of BS \me{j} using projection metric.
 \begin{equation}
 \begin{array}{lcl}
-d_k &=& \det \matbcont{\mbf{T}^\mrm{H} \mbf{T}} \\
+d_k &=& \det \matbcont{\mbf{T}^\mrm{H} \; \mbf{T}} \\
 \mbf{T} &=& \matscont{\mbf{T}_\mrm{X} \; \mbf{T}_\mrm{D} \; \mvecxyz{h}{j}{i}}, \fall i \inm \mc{U}_j
 \end{array}
 \label{sus-e1}

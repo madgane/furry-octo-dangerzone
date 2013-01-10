@@ -1,0 +1,18 @@
+
+The power allocation is performed after ZF precoding at the transmitter to maximize the system capacity or to provide power allocation to reduce the expected queue size of each users in \me{\mc{U}}. The combined ZF for multi-BS and ZF for single BS transmission provides stacked channel inversion of user channels in \me{\mc{S}_b \fall b \inm \mc{B}} and \me{\mc{S}} respectively. The power allocation after precoding is performed to achieve the objective of either maximizing sum rate or to provide queue minimization over each users.
+
+The power allocation to maximize the sum capacity objective is mainly based on the water-filling technique which allocates more power to the users with better channel gains over the rest and also depends on the ambient noise at the receiver. The power allocation discussed in \cite{tse2005fundamentals} is given by the following equation 
+\begin{equation}
+p_i = \matscont{\frac{1}{\lambda} - \frac{\text{N}_{0}}{\gnorm{\mvecxy{h}{i}^{\dag}}^2}}^+
+\label{pa-e1}
+\end{equation} 
+where \me{p_i} denotes the power assigned for the precoder of user \me{i}, \me{\mvecxy{h}{i}^\dag} represents the equivalent zero-forced channel vector for \me{i^{\mrm{th}}} user in \me{\mc{S}}, \me{[x]^+} represents \me{\max \{ 0,x \}} and \me{\lambda} is the Lagrange multiplier for the constraint \eqref{sm-e2}. In case of multi-BS precoding scheme, WF based power allocation is performed over the precoders belonging to the user set \me{\mc{S}_b} independently.
+
+The power allocation to reduce the expected queue size is based on weighted sum rate where the weights are based on the current backlogged packets of users in the transmission set. The weighted sum rate maximization is performed in the similar manner using lagrange multiplier for the constraint \eqref{sm-e2}. The queue weighted power allocation strategy is given by the following equation  
+\begin{equation}
+p_i = \matscont{\frac{\mbf{Q}_i}{\lambda} - \frac{\text{N}_{0}}{\gnorm{\mvecxy{h}{i}^{\dag}}^2}}^+
+\label{pa-e2}
+\end{equation} 
+where \me{\mbf{Q}_i} corresponds the backlogged packets of user \me{i} and the remaining variables are similar to \eqref{pa-e1}. This power allocation scheme provides significant reduction in the queue size of each users thereby providing fairness among the users.
+
+The proportional fair scheme provides fairness in terms of user selection based on the average service rate. The precoding scheme and power allocation which mainly seeks for capacity maximizing objective will be greedy in nature thereby negates the effect of fairness. The queue based power allocation based on weighted sum rate provides improved fairness among the users since it depends on the queue backlogs also into account while performing power allocation. 
