@@ -1,19 +1,25 @@
 
 The main objective of capacity achieving MU-MIMO transmission is to select the users whose channel vectors are uncorrelated. Uncorrelated channels can be de-coupled easily to facilitate interference free transmission with the use of precoders. The measure of uncorrelated vectors can be obtained by finding determinant of the inner product of stacked  channel vectors. The capacity achieving user selection is carried out by forming a matrix \me{\mbf{M}} of size \me{K \times K} where \me{K = \card{\mcxy{U}{1}} = \card{\mc{U}}} which describes the number of users in a given BS.
 
-The matrix \me{\mbf{M}} is populated with the metric which holds information about the co-existence measure between the users corresponding to the \me{i^{\mrm{th}}} row and \me{j^{\mrm{th}}} column. The metric also includes the channel vectors of users already selected for transmission at a given scheduling resource. The metric used at each element of the matrix \me{\mbf{M}} is given by
+The matrix \me{\mbf{M}} is populated with the metric which holds information about the co-existence measure between the users corresponding to the \me{i^{\mrm{th}}} row and \me{j^{\mrm{th}}} column. The metric also includes the channel vectors of users already selected for transmission at a given scheduling resource. The metric used at each element of the matrix \me{\mbf{M}} is given by the following.
 \begin{eqnarray}
-\mbf{T} &=& \left [\,\mbf{T}_\mrm{o} \; \mvecxy{h}{i}^\mrm{T} \; \mvecxy{h}{j}^\mrm{T} \, \right ] \\
-\msclxyz{M}{i}{j} &=& \det{\left ( \, \mbf{T}^{\mrm{H}} \; \mbf{T} \, \right )} \label{mca1-e1:2}
+\mbf{T} &=& \left [\,\mbf{T}_\mrm{o} \; \mvecxy{h}{i}^\mrm{T} \, \right ] \\
+\msclxyz{M}{i}{i} &=& \det{\left ( \, \mbf{T}^{\mrm{H}} \; \mbf{T} \, \right )} \label{mca1-e1:1}
 \label{mca1-e1}
 \end{eqnarray}
-where \me{\mbf{T}_\mrm{o}} denotes the stacked channel vectors of users belonging to the transmission set \me{\mc{S}, \, \card{\mc{S}} \leq N_\mrm{T}} at a given scheduling instant. The set \me{\mc{S}} is initialized with \me{\emptyset} and users are included in the set incrementally. Once the matrix \me{\mbf{M}} is populated, a user is selected based on the method followed in analytic hierarchy process (AHP) as in \cite{saaty2008decision}. The matrix \me{\mbf{M} \succeq 0}, Eigen value decomposition (EVD) decomposes the matrix into \me{\mbf{P} \, \mbf{D} \, \mbf{P}^\mrm{T}} where \me{\mbf{P}} is a unitary matrix consists of Eigen vectors of \me{\mbf{M}} and \me{\mbf{D}} is a diagonal matrix having Eigen values on its diagonal entries.
+when \me{i = j} and the following when \me{i \neq j}
+\begin{eqnarray}
+\mbf{T} &=& \left [\,\mbf{T}_\mrm{o} \; \mvecxy{h}{i}^\mrm{T} \; \mvecxy{h}{j}^\mrm{T} \, \right ] \\
+\msclxyz{M}{i}{j} &=& \det{\left ( \, \mbf{T}^{\mrm{H}} \; \mbf{T} \, \right )} \label{mca1-e2:1}
+\label{mca1-e2}
+\end{eqnarray}
+where \me{\mbf{T}_\mrm{o}} denotes the stacked channel vectors of users belonging to the transmission set \me{\mc{S}, \, \card{\mc{S}} \leq N_\mrm{T}} at a given scheduling instant. The set \me{\mc{S}} is initialized with \me{\emptyset} and users are included in the set incrementally. Once the matrix \me{\mbf{M}} is populated, a user is selected based on the method followed in analytic hierarchy process (AHP) as in \cite{saaty2008decision} which is briefed here for continuity. The matrix \me{\mbf{M} \succeq 0}, Eigen value decomposition (EVD) decomposes the matrix into \me{\mbf{P} \, \mbf{D} \, \mbf{P}^\mrm{T}} where \me{\mbf{P}} is a unitary matrix consists of Eigen vectors of \me{\mbf{M}} and \me{\mbf{D}} is a diagonal matrix having Eigen values on its diagonal entries.
 
 Let \me{\msclxyz{D}{k}{k}} represents the maximum Eigen value at \me{k^{\mrm{th}}} index and the corresponding Eigen vector is given by \me{\mvecxy{p}{k}}. Since each entry \me{\msclxyz{p}{i}{k} \fall i \inm \{1,2,\dotsc,K \}} has unequal gains which corresponds to the significance of the entry in achieving the corresponding Eigen gain, user \me{i} is selected with
 \begin{eqnarray}
-i &=& \argmax_{\mathrm{i}} \norm{\msclxyz{p}{i}{k}}{2} \label{mca1-e2:1} \\
+i &=& \argmax_{\mathrm{i}} \norm{\msclxyz{p}{i}{k}}{2} \label{mca1-e3:1} \\
 \mc{S} &=& \left \lbrace \, \mc{S} \, \cup \, i \, \right \rbrace.
-\label{mca1-e2}
+\label{mca1-e3}
 \end{eqnarray}
 
 Selection is carried out in an iterative manner with the stopping criterion given by \me{\card{\mc{S}} = N_\mrm{T}} as detailed in Algorithm. \ref{mca1-a1}. Precoding is performed over the channels of the users in \me{\mc{S}} which forms the transmission set. Precoding is either zero-forcing (ZF) with water-filling power allocation (WF-PA) as in \cite{tse2005fundamentals} or weighted sum rate maximization using weighted minimum mean squared error (W-MMSE) as given in \cite{wmmse_shi} with the power constraint as given in \eqref{sm-e2}.
@@ -25,10 +31,10 @@ Selection is carried out in an iterative manner with the stopping criterion give
  \KwData{\me{\mc{S} = \emptyset, \, \mbf{M}, \, \mbf{T}_\mrm{o} = [\,]}}
  \While{\me{\card{S} \leq N_\mrm{T}}}{
  \ForEach{\me{ \msclxyz{M}{i}{j}, \, \mrm{where} \, i,j \inm \{1,2,\dotsc,K\}}}{
- formulate \me{\msclxyz{M}{i}{j}} using \eqref{mca1-e1:2} \;
+ formulate \me{\msclxyz{M}{i}{j}} using \eqref{mca1-e1:1} and \eqref{mca1-e2:1} \;
  }
  perform EVD as \me{\mbf{M} = \mbf{P} \, \mbf{D} \, \mbf{P}^\mrm{T}} \;
- select user \me{i} using \eqref{mca1-e2:1} \;
+ select user \me{i} using \eqref{mca1-e3:1} \;
  \me{\mc{S} = \{ \, \mc{S} \cup i \, \}}, \me{\mbf{T}_{\mrm{o}} = \left [\, \mbf{T}_{\mrm{o}} \, \mvecxy{h}{i} \, \right ]} \;
  }
  \caption{Eigen Vector based User Selection}

@@ -13,6 +13,17 @@ The transmitted symbol \me{\mvecxyz{x}{b}{k}} for the user \inmt{k} from BS \inm
 \label{sm-e2}
 \end{equation}
 
-The precoding scheme is based on weighted minimum mean squared error (W-MMSE) scheme discussed in \cite{wmmse_shi} or by combined zero-forcing (CZF) scheme by stacking the channel of users in the transmission set of all BSs in \me{\mc{B}} as discussed in \cite{spencer2004zero}. Once precoders are defined, power allocation is performed over precoders designed by CZF scheme to maximize the sum capacity. The power allocation is performed jointly while designing precoders in W-MMSE scheme.
+The precoding scheme is based on weighted minimum mean squared error (W-MMSE) scheme discussed in \cite{wmmse_shi} or by combined zero-forcing (CZF) scheme by stacking the channel of users in the transmission set of all BSs in \me{\mc{B}} as discussed in \cite{spencer2004zero}. Once precoders are defined, power allocation is performed over precoders designed by CZF scheme to either maximize the sum capacity or to minimize the expected queue size. W-MMSE based precoding scheme is also analyzed in this paper to bring out the performance comparison. W-MMSE scheme provides joint design of precoder and power allocation for each users in the network.
 
-The scheduling schemes discussed are not limited to single receive antenna; it can be extended for multi antenna by treating each spatial streams as virtual users using singular value decomposition (SVD) over the channel matrix of users in \me{\mc{U}}. The precoder design using W-MMSE scheme is straight forward with the transmission user set selected based on scheduling schemes as it optimizes both transmit and receive beamformers jointly. The zero-forcing precoding is performed in an iterative manner by fixing the receive beamformers using MMSE receivers as discussed in \cite{antti_user_selection}. 
+Scheduling schemes are compared with the well established schemes discussed in \cite{sus2006zfbf,zhang2007user} which aims at selecting least correlated users for the transmission set for MU-MIMO. The selection process is performed in an iterative manner by selecting the first user based on the channel norm.
+\begin{eqnarray}
+\mbf{N} &=& \mbf{I} - \mbf{U} ( \, \mbf{U}^\mrm{H} \mbf{U} \, )^{-1} \mbf{U}^\mrm{H} \label{sm-e3} \\
+\mbf{U} &=& \matscont{\mvecxyz{h}{b}{x}^\mrm{T} \; \mvecxyz{h}{b}{y}^\mrm{T}} \fall x,y \inm \mc{S}_b \text{ where } b \inm \mc{B} \nonumber
+\end{eqnarray}
+The successive users are chosen by selecting the user with the highest projection gain over the null space formed by the channel vectors of the already chosen users at BS \me{b} as given by
+\begin{equation}
+j = \argmax_i \gnorm{\mbf{N}^\mrm{H} \mvecxyz{h}{b}{i}^\mrm{T}} \, \fall i \inm \mc{U}_b.
+\end{equation}
+The user \me{j} is then selected as the next user in the transmission set and the process is repeated until the transmission user set \me{\card{\mc{S}_b} = N_\mrm{T}}. The selection schemes discussed in \cite{jin2010novel,ko2012determinant} performs similar to the one discussed earlier but with different interpretation which is based on maximizing the volume formed by the user channel vectors.
+
+The scheduling schemes discussed are not limited to single receive antenna; it can be extended for multi antenna by treating each spatial streams as virtual users using singular value decomposition (SVD) over the channel matrix of users in \me{\mc{U}}. The precoder design using W-MMSE scheme is straight forward with the transmission user set selected based on scheduling schemes as it optimizes both transmit and receive beamformers jointly. The zero-forcing precoding is performed in an iterative manner by fixing the receive beamformers using MMSE receivers as discussed in \cite{antti_user_selection}.

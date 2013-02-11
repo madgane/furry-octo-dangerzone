@@ -7,15 +7,15 @@ Let \me{\mc{S}_b} and \me{\mc{S}_{b,\mrm{H}}} be initialized with \me{\emptyset,
 \begin{equation}
 \begin{array}{lcl}
 d_k &=& \det \matbcont{\mbf{T}^\mrm{H} \; \mbf{T}} \\
-\mbf{T} &=& \matscont{\mbf{T}_\mrm{X} \; \mbf{T}_\mrm{D} \; \mvecxyz{h}{j}{i}}, \fall i \inm \mc{U}_j
+\mbf{T} &=& \matscont{\mbf{T}_\mrm{X} \; \mbf{T}_\mrm{D} \; \mvecxyz{h}{j}{i}^\mrm{T}}, \fall i \inm \mc{U}_j
 \end{array}
 \label{sus-e1}
 \end{equation}
 where \me{\mbf{T}} is estimated using \me{\mbf{T}_{\mrm{X}}} which corresponds to the stacked channel vectors between neighboring users and the BS \me{j} and \me{\mbf{T}_{\mrm{D}}} represents the stacked channel vectors of users already selected for transmission in the same BS \me{j} as given by
 \begin{equation}
 \begin{array}{lcl}
-\mbf{T}_{\mrm{D}} &=& \matscont{\mvecxyz{h}{j}{k} \dotso}, \fall k \inm \mc{S}_j \\
-\mbf{T}_{\mrm{X}} &=& \matscont{\mvecxyz{h}{j}{k} \dotso }, \fall k \inm \displaystyle \bigcup_{\mathclap{\fall b \inm \mc{B} \bs j}} \mc{S}_b.
+\mbf{T}_{\mrm{D}} &=& \matscont{\mvecxyz{h}{j}{k}^\mrm{T} \dotso}, \fall k \inm \mc{S}_j \\
+\mbf{T}_{\mrm{X}} &=& \matscont{\mvecxyz{h}{j}{k}^\mrm{T} \dotso }, \fall k \inm \displaystyle \bigcup_{\mathclap{\fall b \inm \mc{B} \bs j}} \mc{S}_b.
 \end{array}
 \label{sus-e2}
 \end{equation}

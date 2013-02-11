@@ -1,5 +1,5 @@
 
-The objective of capacity achieving user selection and the complexity involved in implementing the same is considered. The proposed method provides and alternative way to achieve the null space calculations involved in the selection procedure. User selection based on QR based decomposition requires null space formulation in order to find the orthogonal subspace for the given vector channel were discussed in \cite{traniterative,zhang2007user,sun2009eigenmode,antti_user_selection}.
+The objective of capacity achieving user selection and the complexity involved in implementing the same is considered. The proposed method provides an alternative way to achieve the null space calculations involved in the selection procedure. User selection based on QR based decomposition requires null space formulation in order to find the orthogonal subspace for the given vector channel were discussed in \cite{traniterative,zhang2007user,sun2009eigenmode,antti_user_selection}.
 
 The user channels are projected on to the null space of the existing users channel vectors in \me{\mc{S}} where \me{\mc{S}} represents the users selected for the current scheduling instant. The null space is approximated by the product of the vertical projection distance from the given channel vector to the existing users channel vectors in \me{\mc{S}}. The channel vector \me{\mvecxy{h}{i} \fall i \inm \mc{U}} is projected on to the matrix \me{\mbf{U}} formed by stacking the normalized channel vectors of the users in \me{\mc{S}}.
 \begin{equation}
@@ -8,7 +8,7 @@ The user channels are projected on to the null space of the existing users chann
 \end{equation}
 In order to find the vertical projection distance, channel vector of the users in \me{\mc{U}} is projected on \me{\mbf{U}} is  denoted by \me{\mbf{g}}. The vector \me{\mbf{g}} contains the projection gains of the given channel vector onto the normalized channel of the users in \me{\mc{S}} as
 \begin{equation}
-\mbf{g} = \mbf{U}^\mrm{T} \mvecxy{h}{i}, \fall i \inm \mc{U}
+\mbf{g} = \mbf{U}^\mrm{H} \mvecxy{h}{i}^\mrm{T}, \fall i \inm \mc{U}
 \label{mca2-e2}
 \end{equation}
 The vertical projection distance is given by subtracting the norm of channel vector from the projection metric \me{\mbf{g}}. The null space projection is then obtained by multiplying the vertical projection distance from all the unit vectors from the given channel vector as
@@ -18,7 +18,9 @@ The vertical projection distance is given by subtracting the norm of channel vec
 \end{equation}
 where \me{g_l} represents \me{l^\mrm{th}} element in \me{\mbf{g}} and \me{\msclxy{m}{i}} denotes the null space projection of user \me{i} on to the existing user set \me{\mc{S}}.
 
-The product measures the gain achieved by projecting the vector \me{\mvecxy{h}{i}} over the null space of the vectors formed by the channel vectors of users in the set \me{\mc{S}}. The product yields `\me{0}' when the vector \me{\mvecxy{h}{i}} is in the direction of the unit channel vectors in \me{\mbf{U}}. The product will not provide `\me{0}' when it is collinear with any two vectors in \me{\mbf{U}} as given by null space. Even though this method provides an approximation for null space, performance achieved by this scheme is closer to that of the selection scheme achieved by null space based projections discussed in \cite{sus2006zfbf,icsps2010,antti_user_selection}. The pseudo code is briefed in the Algorithm. \ref{mca2-a1}.
+The product measures the gain achieved by projecting the vector \me{\mvecxy{h}{i}} over the null space of the vectors formed by the channel vectors of users in the set \me{\mc{S}}. The product yields `\me{0}' when the vector \me{\mvecxy{h}{i}} is in the direction of the unit channel vectors in \me{\mbf{U}}. The product will not provide `\me{0}' when it is collinear with any two vectors in \me{\mbf{U}} as given by null space. Even though this method provides an approximation for null space, performance achieved by this scheme is closer to that of the selection scheme achieved by null space based projections discussed in \cite{sus2006zfbf,antti_user_selection,icsps2010}. 
+
+The approximation of \eqref{mca2-e2} and \eqref{mca2-e3} in the current scheme provides the approximation for the null space projection discussed in \eqref{sm-e3} providing significant reduction in the computational complexity involved in the calculation of the metric for each user thereby yielding the overall reduction in the complexity. The pseudo code is briefed in the Algorithm. \ref{mca2-a1}.
 
 \begin{algorithm}
  \SetAlgoLined

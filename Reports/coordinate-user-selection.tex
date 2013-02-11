@@ -10,15 +10,15 @@ where \me{\{\, \hat{b},\hat{k} \,\} \: = \: \argmax_{b,k} \gnorm{\mvecxyz{h}{b}{
 \begin{equation}
 \begin{array}{lcl}
 D_{j,i} &=& \det \left ( \; \mbf{T}^{\mrm{H}} \; \mbf{T} \; \right ) \\
-\mbf{T} &=& \matscont{\mbf{T}_\mrm{X} \; \mbf{T}_\mrm{D} \; \mvecxyz{h}{j}{i}}, \fall i \inm \mc{U}
+\mbf{T} &=& \matscont{\mbf{T}_\mrm{X} \; \mbf{T}_\mrm{D} \; \mvecxyz{h}{j}{i}^\mrm{T}}, \fall i \inm \mc{U}
 \end{array}
 \label{cus-e2}
 \end{equation}
 where \me{D_{j,i}} corresponds the the metric evaluated for the user \me{i} when linked to BS \me{j} and \me{\mbf{T}} is evaluated using the following \eqref{cus-e3}
 \begin{equation}
 \begin{array}{lcl}
-\mbf{T}_{\mrm{D}} &=& \matscont{\mvecxyz{h}{j}{k} \dotso}, \fall k \inm \mc{S}_j \\
-\mbf{T}_{\mrm{X}} &=& \matscont{\mvecxyz{h}{j}{k} \dotso }, \fall k \inm \displaystyle \bigcup_{\mathclap{\fall b \inm \mc{B} \bs j}} \mc{S}_b
+\mbf{T}_{\mrm{D}} &=& \matscont{\mvecxyz{h}{j}{k}^\mrm{T} \dotso}, \fall k \inm \mc{S}_j \\
+\mbf{T}_{\mrm{X}} &=& \matscont{\mvecxyz{h}{j}{k}^\mrm{T} \dotso }, \fall k \inm \displaystyle \bigcup_{\mathclap{\fall b \inm \mc{B} \bs j}} \mc{S}_b
 \end{array}
 \label{cus-e3}
 \end{equation}
