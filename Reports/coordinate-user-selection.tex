@@ -1,5 +1,5 @@
 
-This section discusses the co-ordinate transmission scheme for users in the cell-edge by associating users in \me{\mc{U}} to BSs in \me{\mc{B}} based on instantaneous channel realizations. Users with proportional rate fairness has been dealt in \cite{antti_coord_user_selection} where many variants of user selection for co-ordinate transmission are proposed. The current work addresses the user selection scheme for co-ordinate transmission by selecting users for \me{\mc{S}_b \fall b \inm \mc{B}} in an iterative manner.
+This section discusses the coordinate transmission scheme for users in the cell-edge by associating users in \me{\mc{U}} to BSs in \me{\mc{B}} based on instantaneous channel realizations. Users with proportional rate fairness has been dealt in \cite{antti_coord_user_selection} where many variants of user selection for coordinate transmission are proposed. The current work addresses the user selection scheme for coordinate transmission by selecting users for \me{\mc{S}_b \fall b \inm \mc{B}} in an iterative manner.
 
 Let \me{\mc{S}_b} and \me{\mc{S}_{b,\mrm{H}}} are initialized to \me{\emptyset, \fall b \inm \mc{B}} where \me{\mc{S}_{k,\mrm{H}}} represents the transmission user set from \me{(i-1)^{\mrm{th}}} iteration for BS \me{b}. The user selection is carried out in a centralized server with the transmission set \me{\card{\mc{S}_b} \leq \left \lfloor \frac{N_\mrm{T}}{N_\mrm{B}} \right \rfloor} for each BS \me{b \inm \mc{B}}. The first user is selected by sorting the channel gains of each users in \me{\mc{U}} with each BSs in \me{\mc{B}} and the user \me{\hat{k}} with highest norm is assigned to the corresponding BS \me{\hat{b}}.
 \begin{equation}
@@ -56,7 +56,7 @@ Once the users are selected for each BSs with the constraint on \me{\card{\mc{S}
  }
  \me{\mc{S}_{b,\mrm{H}} = \mc{S}_b,\; \fall b \inm \mc{B}} \;
  }
- \caption{Co-ordinate user scheduling}
+ \caption{Coordinate user scheduling}
  \label{cus-a1}
 \end{algorithm}
 
