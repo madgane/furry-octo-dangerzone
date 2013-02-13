@@ -24,6 +24,11 @@ The successive users are chosen by selecting the user with the highest projectio
 \begin{equation}
 j = \argmax_i \gnorm{\mbf{N}^\mrm{H} \mvecxyz{h}{b}{i}^\mrm{T}} \, \fall i \inm \mc{U}_b.
 \end{equation}
-The user \me{j} is then selected as the next user in the transmission set and the process is repeated until the transmission user set \me{\card{\mc{S}_b} = N_\mrm{T}}. The selection schemes discussed in \cite{jin2010novel,ko2012determinant} performs similar to the one discussed earlier but with different interpretation which is based on maximizing the volume formed by the user channel vectors.
+The user \me{j} is then selected as the next user in the transmission set and the process is repeated until the transmission user set \me{\card{\mc{S}_b} = N_\mrm{T}}. The selection schemes discussed in \cite{jin2010novel,ko2012determinant} performs similar to the one discussed earlier but with different interpretation which is based on maximizing the volume formed by the user channel vectors. The overall complex multiplications involved is given as
+\begin{equation}
+\approx \left ( \, N^3_\mrm{T} (N_\mrm{T} - 1) + N^2_\mrm{T} \, \right ) \; \card{\mc{U}_b} + \sum_{i = 1}^{N_\mrm{T} - 1} 2i N^2_\mrm{T} + i^2( \, i + N_\mrm{T} \,)
+\label{sm-e4}
+\end{equation}
+where the terms inside summation are meant for the null space calculations.
 
 The scheduling schemes discussed are not limited to single receive antenna; it can be extended for multi antenna by treating each spatial streams as virtual users using singular value decomposition (SVD) over the channel matrix of users in \me{\mc{U}}. The precoder design using W-MMSE scheme is straight forward with the transmission user set selected based on scheduling schemes as it optimizes both transmit and receive beamformers jointly. The zero-forcing precoding is performed in an iterative manner by fixing the receive beamformers using MMSE receivers as discussed in \cite{antti_user_selection}.
