@@ -41,9 +41,9 @@ Selection is carried out in an iterative manner with the stopping criterion give
  \label{mca1-a1}
 \end{algorithm}
 
-The complex multiplications involved in the selection process is given as 
+The complex multiplications involved in the selection process is given as
 \begin{equation}
-\approx \left \lbrace \; \sum_{i = 1}^{N_\mrm{T}} 2i N^2_\mrm{T} + i^2(i + N_\mrm{T}) + (i + 1) N^2_\mrm{T} + \frac{(i + 1)^3}{3} \right \rbrace \card{\mc{U}_b}
+\approx \left \lbrace \sum_{i = 1}^{N_\mrm{T} - 1} iN^2_\mrm{T} + i^3 + 2N_\mrm{T}i^2 + \matbcont{(i+1)N^2_\mrm{T} + \frac{(i+1)}{3}^3} \right \rbrace \frac{\card{\mc{U}_b}(\card{\mc{U}_b} + 1)}{2} + \Delta N_\mrm{T}
 \label{mca1-e4}
 \end{equation}
-where \me{\frac{(i + 1)^3}{3}} provides the rough calculation of the determinant of a matrix of size \me{i}.
+where \me{\frac{(i + 1)^3}{3}} provides the rough calculation of the determinant of a matrix of size \me{i} and \me{\Delta} refers to the complexity involved in calculating SVD of the matrix sized \me{\card{\mc{U}_b}}. The factor \me{\frac{\card{\mc{U}_b}(\card{\mc{U}_b} + 1)}{2}} arises from the PSD of matrix \me{\mbf{M}} which requires only the earlier complexity instead of \me{\card{\mc{U}_b}^3}.
