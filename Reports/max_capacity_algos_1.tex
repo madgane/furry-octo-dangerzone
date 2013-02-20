@@ -1,13 +1,15 @@
 
 The main objective of capacity achieving MU-MIMO transmission is to select the users whose channel vectors are uncorrelated. Uncorrelated channels can be de-coupled easily to facilitate interference free transmission with the use of precoders. The measure of uncorrelated vectors can be obtained by finding determinant of the inner product of stacked  channel vectors. The capacity achieving user selection is carried out by forming a matrix \me{\mbf{M}} of size \me{K \times K} where \me{K = \card{\mcxy{U}{1}} = \card{\mc{U}}} which describes the number of users in a given BS.
 
-The matrix \me{\mbf{M}} is populated with the metric which holds information about the co-existence measure between the users corresponding to the \me{i^{\mrm{th}}} row and \me{j^{\mrm{th}}} column. The metric also includes the channel vectors of users already selected for transmission at a given scheduling resource. The metric used at the diagonal indices are the channel norms of the corresponding users which is given by
+The matrix \me{\mbf{M}} represents the priority matrix which quantifies the coexistence of a certain user with other users in the system. The metric which quantifies the measure of coexistence should depend on the channel vector which decides the precoder design for interference free transmission. The ideal metric to quantify the coexistence is the correlation between the users channel vector which is given by the determinant of the inner product of the stacked channel vectors. The matrix \me{\mbf{M}} which quantifies the significance of coexistence is symmetric since the inner product measure is commutative. Once the matrix \me{\mbf{M}} is formulated, the relative priorities are given by the Eigen vector of the dominant Eigen value of the matrix \me{\mbf{M}} \cite{saaty2008decision}.
+
+With the above reasoning, the matrix \me{\mbf{M}} is populated with the metric which holds information about the coexistence measure between the users corresponding to the \me{i^{\mrm{th}}} row and \me{j^{\mrm{th}}} column. The metric also includes the channel vectors of users already selected for transmission at a given scheduling resource. The diagonal elements of the matrix \me{\mbf{M}} or self existence metric is given by
 \begin{eqnarray}
 \mbf{T} &=& \left [\,\mbf{T}_\mrm{o} \; \mvecxy{h}{i}^\mrm{T} \, \right ] \\
 \msclxyz{M}{i}{i} &=& \det{\left ( \, \mbf{T}^{\mrm{H}} \; \mbf{T} \, \right )} \label{mca1-e1:1}
 \label{mca1-e1}
 \end{eqnarray}
-and the metric used at other entries are the measure of area / volume subtended by the channel vectors of users at \me{i^\mrm{th}} row and \me{j^\mrm{th}} column along with channel vectors already selected in the previous iteration. This is given as follows,
+and the metric used at non diagonal entries or coexistence metric represents the measure of area or volume subtended by the channel vector of users at \me{i^\mrm{th}} row and \me{j^\mrm{th}} column together with channel vectors already selected in the previous iteration as given by
 \begin{eqnarray}
 \mbf{T} &=& \left [\,\mbf{T}_\mrm{o} \; \mvecxy{h}{i}^\mrm{T} \; \mvecxy{h}{j}^\mrm{T} \, \right ] \\
 \msclxyz{M}{i}{j} &=& \det{\left ( \, \mbf{T}^{\mrm{H}} \; \mbf{T} \, \right )} \label{mca1-e2:1}
